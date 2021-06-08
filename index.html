@@ -1,0 +1,208 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Lucky Duckys</title>
+	
+		<meta name="author" content="Maccs Universal">
+		<meta name="description" content="A betting page made for Ethereum address users.">
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="sheets/ld_style.css" id="themed">
+		<link rel="stylesheet" href="sheets/loader.css">
+		<link rel="stylesheet" href="sheets/results_style.css">
+		<link rel="stylesheet" href="sheets/undo_styles.css">
+	</head>
+	<body id="body">
+		<div class="tint" id="tint">
+			<div class="exit" id="exit"><button style="background-color: black; color: white; border: none;">[X]</button></div>
+			<div class="container">
+				<button class="checkButton" id="checkButton" style="background-color: rgb(56, 125, 228); border: none;">Check Result</button>
+				<div class="results" id="results"></div>
+				<p class="resultText" id="resultText"></p>
+				<div class="gptable-container" id="gptable-container">
+					<table class="newTable" id="newTable">
+						<thead>
+							<tr>
+								<th>No.</th>
+								<th>Game ID</th>
+								<th>Guess</th>
+								<th>Winning Number</th>
+								<th>Bet</th>
+								<th>Reward</th>
+								<th>Claimed</th>
+								<th style="border: none;"></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="grid-container" id="info">
+					<div class="item1" id="about">
+						<h1>About</h1>
+						<p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Hello World! And welcome to Lucky-Duckys!<br><br>
+							Lucky Duckys is a betting with a twist so sweet and juicy you’ll keep coming back for more.
+							Initially developed as a way to raise ETH for staking, Lucky-Duckys is now a win-win guessing game designed to keep a smile on you in the black whatever the result.<br><br>
+							Hey guys I’m Maccs and I’m a keen smart contract and web developer as well as a crypto enthusiast who believes that blockchain technology harnesses the power to expand the way we do business across a multitude of industries. 
+							As a firm believer in utility over plain bandwagon creation of crypto, I find myself taking a “blockchain first” when looking at how various entities can benefit (or not benefit) from this revolutionary technology.<br><br> 
+							This is part of the reason why the concept behind Lucky-Duckys has changed so much in just under a year. Would I like to earn some coin from this platform? Yea I would. But now people can benefit from playing in a way that wouldn’t have been possible if it wasn’t for the transparency and immutability offered from the blockchain.<br>
+							<br><br>So what is Lucky-Duckys? It’s simply a game chance where the player picks a number between 1 and 100 and places a bet. If the random number generator produces a number that matches your guess then you win a reward.<br><br>
+							I have used Solidity to develop the smart contract, which is currently deployed on the Kovan testnet. The contract itself requires a deposit of LINK token to retrieve the random number from the Chainlink VRF contract. The site itself has been developed using pure Javascript, Web3.js, CSS and HTML.
+							I hope you enjoy the game and the feel of the site. If you’d like to get in touch to discuss improvements or ideas then feel free to send an email to the address in the footer.
+							</p>
+					</div>
+					<div class="item2" id="howToPlay">
+						<h1 style="text-align: center;">How To Play</h1>
+						<ol style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+							<li>Connect your wallet to gain full functionality of the site.</li><br>
+							<li>Deposit some ETH.</li><br>
+							<li>Move some of your Balance across to your Bet Balance.</li><br>
+							<li>Now your can play! Pick an amount you’d like to Bet and pick a number as your Guess.</li><br>
+							<li>Hit the play button and follow the instructions to reveal the result.</li><br>
+						</ol>
+						<p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; text-decoration: underline;">How to claim rewards</p>
+						<p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">There are two ways you can claim rewards:</p>
+						<ol style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+							<li>When your finish a game, if you win the Claim button will appear blue. You can click this button to claim your rewards.</li><br>
+							<li>Click the ‘Games Played’ button and a list of all the games you’ve played will be returned in a table format. If you have any unclaimed rewards they can be retrieved by clicking the claim button positioned in line with the winning stats.</li><br>
+						</ol>
+					</div>
+					<div class="item1" id="futureDevelopments">
+						<h1>Future Developments</h1>
+						<p>Staking Pools</p>
+						<p>As mentioned in the ‘About’ section, Lucky-Duckys is game with a twist and the twist is this: If you lose when you play, your bet amount will go toward an ETH 2.0 staking pool made up of bets from other players. Staking will commence when the minimum requirement for staking is met through games played. Players Bets will be staked for a minimum of 2 years and rewards (minus staking fees) will be deposited to the players balance at set intervals. Winners of the game will have the choice on if they wish to stake their winnings or withdraw the rewards to their balance. </p>
+						<p>There is also a plan to introduce a lottery pool, which gives all participants an equal chance of wining the amount deposited to pool. The winning player will then have all or a portion of their winnings staked on the ETH 2.0 network. Lucky-Duckys lottery pool give players the opportunity to win big on a small outlay because of the number of people getting involved.</p>
+					</div>
+				</div>
+				<div class="popUpBox" id="popUpBoxDeposit" style="display: none;">
+					<h1>DEPOSIT ETH</h1>
+					<p> Add Eth to your BALANCE to get started. Then move the amount you would like place in a bet by pressing the '> Bets' button.</p>
+					<input id="depositInput" type="number" style="margin-bottom:20px;">
+					<div class="popUpButton" id="actionDepositButton" style="float: none; width: 100px; margin-right: auto; margin-left: auto; margin-bottom: 10px;">
+						<button class="buttonText" id="actionDepositText" style="background-color: rgba(0, 0, 0, 0); border: none; display: block; margin-left: auto; margin-right: auto; padding: 2px;"><b>deposit ETH</b></button>
+					</div>
+				</div>
+				<div class="popUpBox" id="popUpBoxBets" style="display: none;">
+					<h1>BETS BALANCE</h1>
+					<p> Move what you would like to bet across to your BETS BALANCE.</p>
+					<input id="bTbInput" type="number" style="margin-bottom:20px;">
+					<div class="popUpButton" id="actionBetsButton" style="float: none; width: 100px; margin-right: auto; margin-left: auto; margin-bottom: 10px;">
+						<button class="buttonText" id="actionBetsText" style="background-color: rgba(0, 0, 0, 0); border: none; display: block; margin-left: auto; margin-right: auto; padding: 2px;"><b>Add Bet</b></button>
+					</div>
+				</div>
+				<div class="popUpBox" id="popUpBoxUndo" style="display: none;">
+					<h1>UNDO BETS</h1>
+					<p> Choose the amount of ETH you'd like to move from your <b>bet balance</b> to your balance.</p>
+					<input id="UndoInput" type="number" style="margin-bottom:20px;">
+					<div class="popUpButton" id="actionUndoButton" style="float: none; width: 100px; margin-right: auto; margin-left: auto; margin-bottom: 10px;">
+						<button class="buttonText" id="actionUndoText" style="background-color: rgba(0, 0, 0, 0); border: none; display: block; margin-left: auto; margin-right: auto; padding: 2px;"><b>Undo</b></button>
+					</div>
+				</div>
+				<div class="popUpBox" id="popUpBox-withdraw-all" style="display: none;">
+					<h1>WITHDRAW EVERYTHING</h1>
+					<p> Withdraw your bets and current balance?</p>
+						<div class="popUpButton" id="yes-withdraw-all-button" style="display:block; float: none; width: 100px; margin-right: auto; margin-left: auto; margin-bottom: 10px;">
+							<button class="buttonText" id="yes-action-withdraw-all-text" style="background-color: rgba(0, 0, 0, 0); border: none; display: block; margin-left: auto; margin-right: auto; padding: 2px;"><b>Yes</b></button>
+						</div>
+						<div class="popUpButton" id="no-withdraw-all-button" style="display:block; float: none; width: 100px; margin-right: auto; margin-left: auto; margin-bottom: 10px;">
+							<button class="buttonText" id="no-action-withdraw-all-text" style="background-color: rgba(0, 0, 0, 0); border: none; display: block; margin-left: auto; margin-right: auto; padding: 2px;"><b>No</b></button>
+						</div>
+				</div>
+				<div class="popUpBox" id="popUpBox-withdraw-balance" style="display: none;">
+					<h1>WITHDRAW BALANCE</h1>
+					<p> Withdraw only your balance.</p>
+					<input id="withdraw-balance-input" type="number" style="margin-bottom:20px;">
+					<div class="popUpButton" id="withdraw-balance-button" style="float: none; width: 100px; margin-right: auto; margin-left: auto; margin-bottom: 10px;">
+						<button class="buttonText" id="action-withdraw-balance-text" style="background-color: rgba(0, 0, 0, 0); border: none; display: block; margin-left: auto; margin-right: auto; padding: 2px;"><b>Withdraw Balance</b></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tint_loader" id="loader-container">
+			<div class="loader" id="loader"></div>
+		</div>
+		<div class="header" id="header">
+			<a>Lucky Duckys</a>
+			<div class="button" id="menuObject">
+				<div class="menuDots" id="menuDot1"></div>
+				<div class="menuDots" id="menuDot2"></div>
+				<div class="menuDots" id="menuDot3"></div>
+			</div>
+			<div class="button" id="themeObject">
+				<div class="outerCircle" id="outerCircle">
+					<div class="innerCircle" id="innerCircle"></div>
+				</div>
+			</div>
+			<button class="connectedWallet" id="connectedWallet" style="background-color: rgba(0, 0, 0, 0);">
+				<div class="account" id="account">0xa7deE839120cAeBb5b3D7c14Dd2D1A74577EC10d</div>
+				<div class="ethCounter" id="ethCounter"></div>
+			</button>
+			<button class="walletConnector" id="walletConnector" style="background-color: rgba(0, 0, 0, 0);">
+				<div id="walletText">CONNECT TO A WALLET</div>
+			</button>
+			<div class="depositButton" id="depositButton">
+				<button class="depositText" id="depositText" style="background-color: rgba(0, 0, 0, 0); border: none;"><b>deposit Ξ</b></button>
+			</div>
+			<div class="balanceToBets" id="balanceToBets">
+				<button class="betsText" id="betsText" style="background-color: rgba(0, 0, 0, 0); border: none;"><b>> Bets</b></button>
+			</div>
+		</div>
+		<div class="chainId" id="chainId">
+			<li class="isLive" id="isLive"></li>
+			<li id="network">Kovan</li>
+		</div>
+		<div class="menu" id="menu">
+			<ul>
+				<li><button id="gamesPlayedItem" style="background-color: rgba(0, 0, 0, 0); color:dimgray; border:none;">GAMES PLAYED</button></li>
+				<li><button id="infoItem" style="background-color: rgba(0, 0, 0, 0); color:dimgray; border:none;">INFO</button></li>
+			</ul>
+		</div>
+			<div class="game-container" id="game-container">
+				<div class="gcText">YOUR ACCOUNT</div>
+				<div class="table-container">
+					<div class="table-item" id="balance-header">BALANCE</div>
+					<div class="table-item" id="bets-header">BETS BALANCE</div>
+					<div class="table-item" id="eth-balance">0.0 Ξ</div>
+					<div class="table-item" id="eth-bets">0.0 Ξ</div>
+				</div>
+				<div class="gcText" style="font-size: 28px; padding-top: 5px;">BET</div>
+				<input type="number" min="0.0001" max="0.5" step="0.0001" id="betInput" name="betInput"></input>
+				<div class="gcText" style="font-size: 28px; padding-top: 5px;">GUESS</div>
+				<input type="number" min="0" max="100" step="1" required id="guessInput" name="guessInput"></input>
+				<button class="button" id="playButton" style="background-color: rgba(0, 0, 0, 0); display: block;"><b>PLAY</b></button>
+				<div class="divider"></div>
+				<button class="button" id="gamesPlayedButton" style="background-color: rgba(0, 0, 0, 0); display: block;"><b>GAMES PLAYED</b></button>
+				<div id="slidingMenu">
+					<button class="button" id="undoBet" style="background-color: rgba(0, 0, 0, 0); display: block;"><b>UNDO BET</b></button>
+					<button class="button" id="withdrawBalance" style="background-color: rgba(0, 0, 0, 0); display: block;"><b>WITHDRAW BALANCE</b></button>
+					<button class="button" id="withdrawAll" style="background-color: rgba(0, 0, 0, 0); display: block;"><b>WITHDRAW ALL</b></button>
+				</div>
+				<button class="slidingMenuCaret" id="slidingMenuCaret">▼</button>
+			</div>
+		<div class=footer id="footer">
+			<div id="footerEmail">
+				MaccsUniversal@gmail.com
+			</div>
+			<div id="footerDonations"> 
+				Donations: 0xa7deE839120cAeBb5b3D7c14Dd2D1A74577EC10d
+			</div>
+		</div>
+	</body>
+	<script language="javascript" type="text/javascript" src="style_scripts/ld_style.js" id="theme_change"></script>
+	<script language="javascript" type="text/javascript" src="style_scripts/theme_change.js"></script>
+	<script language="javascript" type="text/javascript" src="bundle.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/deposit_eth.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/place_bets.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/play_game.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/gamesPlayed.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/UndoBets.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/withdraw_balance.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/withdraw_all.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/linkBalancecheck.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/claimRewards.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/playerButtons.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/Contract_Abi.js"></script>
+	<script language="javascript" type="text/javascript" src="Web3_scripts/contract_address.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</html>
