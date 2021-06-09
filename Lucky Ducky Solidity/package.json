@@ -1,0 +1,31 @@
+{
+  "name": "lucky-ducky",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "browserify": "^16.5.1",
+    "chai": "^4.3.0"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "scripts": {
+    "build": "browserify ./src/ld_script.js -o ./src/bundle.js",
+    "dev": "lite-sever",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaccsUniversal/Lucky_Ducky.git"
+  },
+  "author": "Maccs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaccsUniversal/Lucky_Ducky/issues"
+  },
+  "homepage": "https://github.com/MaccsUniversal/Lucky_Ducky#readme"
+}
