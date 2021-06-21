@@ -42,7 +42,7 @@ Create a directory for the downloaded folders/files, using command prompt:
 
 Download and install Node.js. 
 
-You can find instructions on how to do this here and here.
+You can find instructions on how to do this here: https://nodejs.org/en/download/ and here: https://nodejs.dev/learn/how-to-install-nodejs.
 
 Install lite-server
 
