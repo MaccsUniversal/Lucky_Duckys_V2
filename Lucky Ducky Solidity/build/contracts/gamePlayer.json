@@ -1,0 +1,1787 @@
+{
+  "contractName": "gamePlayer",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_player",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_playerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewPlayer",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "player",
+      "outputs": [
+        {
+          "internalType": "address payable",
+          "name": "wallet",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "playerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "placedBets",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isPlayer",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.6+commit.6c089d02\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_player\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_playerId\",\"type\":\"uint256\"}],\"name\":\"NewPlayer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"player\",\"outputs\":[{\"internalType\":\"address payable\",\"name\":\"wallet\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"playerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"placedBets\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isPlayer\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Macccs Universal\",\"details\":\"All function calls are currently implemented without side effects.\",\"methods\":{},\"title\":\"Player Registry contract.\"},\"userdoc\":{\"methods\":{},\"notice\":\"This contract contains the criteria that makes up a new player and outlines how new players are initiated and stored.\"}},\"settings\":{\"compilationTarget\":{\"/home/moses/Desktop/Lucky Ducky/contracts/Player.sol\":\"gamePlayer\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/moses/Desktop/Lucky Ducky/contracts/Player.sol\":{\"keccak256\":\"0x54fae29f0514173a0bc008d8204308297ee6936e79fb9cdbcc3ae449d0ff7612\",\"urls\":[\"bzz-raw://edd867ec169197ea3afb80df642aed83c642de5c5bf25a7d8c4cdadba0a989bd\",\"dweb:/ipfs/QmYhkamTLkq89oY7PhL2iFnaFMKszJSpMkNRj8h1JD6uWs\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061016d806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c80634c54e1b514610030575b600080fd5b6100726004803603602081101561004657600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506100d4565b604051808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001858152602001848152602001838152602001821515151581526020019550505050505060405180910390f35b60016020528060005260406000206000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010154908060020154908060030154908060040160009054906101000a900460ff1690508556fea26469706673582212209e30024203167ea32edcf76b99a0c6b374c0e9a5a3b86d8a80ba64dbaaf09fdc64736f6c63430006060033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c80634c54e1b514610030575b600080fd5b6100726004803603602081101561004657600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506100d4565b604051808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001858152602001848152602001838152602001821515151581526020019550505050505060405180910390f35b60016020528060005260406000206000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010154908060020154908060030154908060040160009054906101000a900460ff1690508556fea26469706673582212209e30024203167ea32edcf76b99a0c6b374c0e9a5a3b86d8a80ba64dbaaf09fdc64736f6c63430006060033",
+  "immutableReferences": {},
+  "sourceMap": "351:1016:2:-:0;;;998:23;5:9:-1;2:2;;;27:1;24;17:12;2:2;998:23:2;351:1016;;;;;;",
+  "deployedSourceMap": "351:1016:2:-:0;;;;5:9:-1;2:2;;;27:1;24;17:12;2:2;351:1016:2;;;;;;;;;;;;;;;;12:1:-1;9;2:12;659:41:2;;;;;;15:2:-1;10:3;7:11;4:2;;;31:1;28;21:12;4:2;659:41:2;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity >=0.6.2 <0.8.0;\n//SPDX-License-Identifier: UNLICENSED\n\n/**\n * @title Player Registry contract.\n * @author Macccs Universal\n * @notice This contract contains the criteria that makes up a new player\n * and outlines how new players are initiated and stored.\n * @dev All function calls are currently implemented without side effects.\n */\n\ncontract gamePlayer {\n\n  // A struct type that defines state variables of a player.\n  struct Player{\n      address payable wallet;\n      uint playerId;\n      uint balance;\n      uint placedBets;\n      bool isPlayer;\n  }\n\n  uint internal playerCount;\n\n  /**\n   * @notice map/list of player addresses.\n   */\n  mapping (address => Player) public player;\n\n  /**\n   * @notice new player event.\n   * @dev Event is triggered by the regisration of a new player. \n   * @param _player is the address of new player.\n   * @param _playerId uint that represents player as a number.\n   */\n  event NewPlayer(address indexed _player, uint indexed _playerId);\n  \n  constructor() public {}\n\n  /**@notice creates and registers a new player.\n   * @dev Not sure we actually need the the struct variable playerId\n   * but I've included it for future reference.\n   */\n  function newPlayer() internal{\n    player[msg.sender] = Player(msg.sender, playerCount, 0, 0, true);\n    emit NewPlayer(msg.sender,playerCount);\n    playerCount++;\n  }\n\n}",
+  "sourcePath": "/home/moses/Desktop/Lucky Ducky/contracts/Player.sol",
+  "ast": {
+    "absolutePath": "/home/moses/Desktop/Lucky Ducky/contracts/Player.sol",
+    "exportedSymbols": {
+      "gamePlayer": [
+        1094
+      ]
+    },
+    "id": 1095,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1036,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.6",
+          ".2",
+          "<",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:31:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 1037,
+          "nodeType": "StructuredDocumentation",
+          "src": "71:278:2",
+          "text": "@title Player Registry contract.\n@author Macccs Universal\n@notice This contract contains the criteria that makes up a new player\nand outlines how new players are initiated and stored.\n@dev All function calls are currently implemented without side effects."
+        },
+        "fullyImplemented": true,
+        "id": 1094,
+        "linearizedBaseContracts": [
+          1094
+        ],
+        "name": "gamePlayer",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "gamePlayer.Player",
+            "id": 1048,
+            "members": [
+              {
+                "constant": false,
+                "id": 1039,
+                "mutability": "mutable",
+                "name": "wallet",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 1048,
+                "src": "458:22:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address_payable",
+                  "typeString": "address payable"
+                },
+                "typeName": {
+                  "id": 1038,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "458:15:2",
+                  "stateMutability": "payable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1041,
+                "mutability": "mutable",
+                "name": "playerId",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 1048,
+                "src": "488:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1040,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "488:4:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1043,
+                "mutability": "mutable",
+                "name": "balance",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 1048,
+                "src": "509:12:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1042,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "509:4:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1045,
+                "mutability": "mutable",
+                "name": "placedBets",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 1048,
+                "src": "529:15:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1044,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "529:4:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1047,
+                "mutability": "mutable",
+                "name": "isPlayer",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 1048,
+                "src": "552:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 1046,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "552:4:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Player",
+            "nodeType": "StructDefinition",
+            "scope": 1094,
+            "src": "437:133:2",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1050,
+            "mutability": "mutable",
+            "name": "playerCount",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1094,
+            "src": "574:25:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1049,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "574:4:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "functionSelector": "4c54e1b5",
+            "id": 1054,
+            "mutability": "mutable",
+            "name": "player",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1094,
+            "src": "659:41:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_Player_$1048_storage_$",
+              "typeString": "mapping(address => struct gamePlayer.Player)"
+            },
+            "typeName": {
+              "id": 1053,
+              "keyType": {
+                "id": 1051,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "668:7:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "659:27:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_Player_$1048_storage_$",
+                "typeString": "mapping(address => struct gamePlayer.Player)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 1052,
+                "name": "Player",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1048,
+                "src": "679:6:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Player_$1048_storage_ptr",
+                  "typeString": "struct gamePlayer.Player"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 1055,
+              "nodeType": "StructuredDocumentation",
+              "src": "705:219:2",
+              "text": "@notice new player event.\n@dev Event is triggered by the regisration of a new player. \n@param _player is the address of new player.\n@param _playerId uint that represents player as a number."
+            },
+            "id": 1061,
+            "name": "NewPlayer",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1060,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1057,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_player",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 1061,
+                  "src": "943:23:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1056,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "943:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1059,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_playerId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 1061,
+                  "src": "968:22:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1058,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "968:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "942:49:2"
+            },
+            "src": "927:65:2"
+          },
+          {
+            "body": {
+              "id": 1064,
+              "nodeType": "Block",
+              "src": "1019:2:2",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 1065,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 1062,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1009:2:2"
+            },
+            "returnParameters": {
+              "id": 1063,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1019:0:2"
+            },
+            "scope": 1094,
+            "src": "998:23:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1092,
+              "nodeType": "Block",
+              "src": "1226:138:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1081,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1069,
+                        "name": "player",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1054,
+                        "src": "1232:6:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_Player_$1048_storage_$",
+                          "typeString": "mapping(address => struct gamePlayer.Player storage ref)"
+                        }
+                      },
+                      "id": 1072,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 1070,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -15,
+                          "src": "1239:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 1071,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1239:10:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "1232:18:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Player_$1048_storage",
+                        "typeString": "struct gamePlayer.Player storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1074,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "1260:3:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 1075,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "1260:10:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 1076,
+                          "name": "playerCount",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1050,
+                          "src": "1272:11:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "30",
+                          "id": 1077,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1285:1:2",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        },
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "30",
+                          "id": 1078,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1288:1:2",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        },
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "74727565",
+                          "id": 1079,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1291:4:2",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "true"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        ],
+                        "id": 1073,
+                        "name": "Player",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1048,
+                        "src": "1253:6:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_Player_$1048_storage_ptr_$",
+                          "typeString": "type(struct gamePlayer.Player storage pointer)"
+                        }
+                      },
+                      "id": 1080,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1253:43:2",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Player_$1048_memory_ptr",
+                        "typeString": "struct gamePlayer.Player memory"
+                      }
+                    },
+                    "src": "1232:64:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Player_$1048_storage",
+                      "typeString": "struct gamePlayer.Player storage ref"
+                    }
+                  },
+                  "id": 1082,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1232:64:2"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 1084,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -15,
+                          "src": "1317:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 1085,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1317:10:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1086,
+                        "name": "playerCount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1050,
+                        "src": "1328:11:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1083,
+                      "name": "NewPlayer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1061,
+                      "src": "1307:9:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,uint256)"
+                      }
+                    },
+                    "id": 1087,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1307:33:2",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1088,
+                  "nodeType": "EmitStatement",
+                  "src": "1302:38:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1090,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "++",
+                    "prefix": false,
+                    "src": "1346:13:2",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "id": 1089,
+                      "name": "playerCount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1050,
+                      "src": "1346:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1091,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1346:13:2"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 1066,
+              "nodeType": "StructuredDocumentation",
+              "src": "1025:169:2",
+              "text": "@notice creates and registers a new player.\n@dev Not sure we actually need the the struct variable playerId\nbut I've included it for future reference."
+            },
+            "id": 1093,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newPlayer",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 1067,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1215:2:2"
+            },
+            "returnParameters": {
+              "id": 1068,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1226:0:2"
+            },
+            "scope": 1094,
+            "src": "1197:167:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 1095,
+        "src": "351:1016:2"
+      }
+    ],
+    "src": "0:1367:2"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/home/moses/Desktop/Lucky Ducky/contracts/Player.sol",
+      "exportedSymbols": {
+        "gamePlayer": [
+          1094
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.6",
+            ".2",
+            "<",
+            "0.8",
+            ".0"
+          ]
+        },
+        "id": 1036,
+        "name": "PragmaDirective",
+        "src": "0:31:2"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1094
+          ],
+          "name": "gamePlayer",
+          "scope": 1095
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": "@title Player Registry contract.\n@author Macccs Universal\n@notice This contract contains the criteria that makes up a new player\nand outlines how new players are initiated and stored.\n@dev All function calls are currently implemented without side effects."
+            },
+            "id": 1037,
+            "name": "StructuredDocumentation",
+            "src": "71:278:2"
+          },
+          {
+            "attributes": {
+              "canonicalName": "gamePlayer.Player",
+              "name": "Player",
+              "scope": 1094,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "wallet",
+                  "overrides": null,
+                  "scope": 1048,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address payable",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "stateMutability": "payable",
+                      "type": "address payable"
+                    },
+                    "id": 1038,
+                    "name": "ElementaryTypeName",
+                    "src": "458:15:2"
+                  }
+                ],
+                "id": 1039,
+                "name": "VariableDeclaration",
+                "src": "458:22:2"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "playerId",
+                  "overrides": null,
+                  "scope": 1048,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 1040,
+                    "name": "ElementaryTypeName",
+                    "src": "488:4:2"
+                  }
+                ],
+                "id": 1041,
+                "name": "VariableDeclaration",
+                "src": "488:13:2"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "balance",
+                  "overrides": null,
+                  "scope": 1048,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 1042,
+                    "name": "ElementaryTypeName",
+                    "src": "509:4:2"
+                  }
+                ],
+                "id": 1043,
+                "name": "VariableDeclaration",
+                "src": "509:12:2"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "placedBets",
+                  "overrides": null,
+                  "scope": 1048,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 1044,
+                    "name": "ElementaryTypeName",
+                    "src": "529:4:2"
+                  }
+                ],
+                "id": 1045,
+                "name": "VariableDeclaration",
+                "src": "529:15:2"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "isPlayer",
+                  "overrides": null,
+                  "scope": 1048,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "bool",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "bool",
+                      "type": "bool"
+                    },
+                    "id": 1046,
+                    "name": "ElementaryTypeName",
+                    "src": "552:4:2"
+                  }
+                ],
+                "id": 1047,
+                "name": "VariableDeclaration",
+                "src": "552:13:2"
+              }
+            ],
+            "id": 1048,
+            "name": "StructDefinition",
+            "src": "437:133:2"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "mutability": "mutable",
+              "name": "playerCount",
+              "overrides": null,
+              "scope": 1094,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint",
+                  "type": "uint256"
+                },
+                "id": 1049,
+                "name": "ElementaryTypeName",
+                "src": "574:4:2"
+              }
+            ],
+            "id": 1050,
+            "name": "VariableDeclaration",
+            "src": "574:25:2"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "functionSelector": "4c54e1b5",
+              "mutability": "mutable",
+              "name": "player",
+              "overrides": null,
+              "scope": 1094,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(address => struct gamePlayer.Player)",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(address => struct gamePlayer.Player)"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
+                    },
+                    "id": 1051,
+                    "name": "ElementaryTypeName",
+                    "src": "668:7:2"
+                  },
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "Player",
+                      "referencedDeclaration": 1048,
+                      "type": "struct gamePlayer.Player"
+                    },
+                    "id": 1052,
+                    "name": "UserDefinedTypeName",
+                    "src": "679:6:2"
+                  }
+                ],
+                "id": 1053,
+                "name": "Mapping",
+                "src": "659:27:2"
+              }
+            ],
+            "id": 1054,
+            "name": "VariableDeclaration",
+            "src": "659:41:2"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "NewPlayer"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": "@notice new player event.\n@dev Event is triggered by the regisration of a new player. \n@param _player is the address of new player.\n@param _playerId uint that represents player as a number."
+                },
+                "id": 1055,
+                "name": "StructuredDocumentation",
+                "src": "705:219:2"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "mutability": "mutable",
+                      "name": "_player",
+                      "overrides": null,
+                      "scope": 1061,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 1056,
+                        "name": "ElementaryTypeName",
+                        "src": "943:7:2"
+                      }
+                    ],
+                    "id": 1057,
+                    "name": "VariableDeclaration",
+                    "src": "943:23:2"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "mutability": "mutable",
+                      "name": "_playerId",
+                      "overrides": null,
+                      "scope": 1061,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 1058,
+                        "name": "ElementaryTypeName",
+                        "src": "968:4:2"
+                      }
+                    ],
+                    "id": 1059,
+                    "name": "VariableDeclaration",
+                    "src": "968:22:2"
+                  }
+                ],
+                "id": 1060,
+                "name": "ParameterList",
+                "src": "942:49:2"
+              }
+            ],
+            "id": 1061,
+            "name": "EventDefinition",
+            "src": "927:65:2"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": true,
+              "kind": "constructor",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "overrides": null,
+              "scope": 1094,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1062,
+                "name": "ParameterList",
+                "src": "1009:2:2"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1063,
+                "name": "ParameterList",
+                "src": "1019:0:2"
+              },
+              {
+                "attributes": {
+                  "statements": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1064,
+                "name": "Block",
+                "src": "1019:2:2"
+              }
+            ],
+            "id": 1065,
+            "name": "FunctionDefinition",
+            "src": "998:23:2"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "newPlayer",
+              "overrides": null,
+              "scope": 1094,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": "@notice creates and registers a new player.\n@dev Not sure we actually need the the struct variable playerId\nbut I've included it for future reference."
+                },
+                "id": 1066,
+                "name": "StructuredDocumentation",
+                "src": "1025:169:2"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1067,
+                "name": "ParameterList",
+                "src": "1215:2:2"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1068,
+                "name": "ParameterList",
+                "src": "1226:0:2"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "struct gamePlayer.Player storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "struct gamePlayer.Player storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1054,
+                                  "type": "mapping(address => struct gamePlayer.Player storage ref)",
+                                  "value": "player"
+                                },
+                                "id": 1069,
+                                "name": "Identifier",
+                                "src": "1232:6:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "sender",
+                                  "referencedDeclaration": null,
+                                  "type": "address payable"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -15,
+                                      "type": "msg",
+                                      "value": "msg"
+                                    },
+                                    "id": 1070,
+                                    "name": "Identifier",
+                                    "src": "1239:3:2"
+                                  }
+                                ],
+                                "id": 1071,
+                                "name": "MemberAccess",
+                                "src": "1239:10:2"
+                              }
+                            ],
+                            "id": 1072,
+                            "name": "IndexAccess",
+                            "src": "1232:18:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "struct gamePlayer.Player memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address_payable",
+                                      "typeString": "address payable"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_bool",
+                                      "typeString": "bool"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1048,
+                                  "type": "type(struct gamePlayer.Player storage pointer)",
+                                  "value": "Player"
+                                },
+                                "id": 1073,
+                                "name": "Identifier",
+                                "src": "1253:6:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "sender",
+                                  "referencedDeclaration": null,
+                                  "type": "address payable"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -15,
+                                      "type": "msg",
+                                      "value": "msg"
+                                    },
+                                    "id": 1074,
+                                    "name": "Identifier",
+                                    "src": "1260:3:2"
+                                  }
+                                ],
+                                "id": 1075,
+                                "name": "MemberAccess",
+                                "src": "1260:10:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1050,
+                                  "type": "uint256",
+                                  "value": "playerCount"
+                                },
+                                "id": 1076,
+                                "name": "Identifier",
+                                "src": "1272:11:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 1077,
+                                "name": "Literal",
+                                "src": "1285:1:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 1078,
+                                "name": "Literal",
+                                "src": "1288:1:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "74727565",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "bool",
+                                  "type": "bool",
+                                  "value": "true"
+                                },
+                                "id": 1079,
+                                "name": "Literal",
+                                "src": "1291:4:2"
+                              }
+                            ],
+                            "id": 1080,
+                            "name": "FunctionCall",
+                            "src": "1253:43:2"
+                          }
+                        ],
+                        "id": 1081,
+                        "name": "Assignment",
+                        "src": "1232:64:2"
+                      }
+                    ],
+                    "id": 1082,
+                    "name": "ExpressionStatement",
+                    "src": "1232:64:2"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1061,
+                              "type": "function (address,uint256)",
+                              "value": "NewPlayer"
+                            },
+                            "id": 1083,
+                            "name": "Identifier",
+                            "src": "1307:9:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address payable"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": -15,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 1084,
+                                "name": "Identifier",
+                                "src": "1317:3:2"
+                              }
+                            ],
+                            "id": 1085,
+                            "name": "MemberAccess",
+                            "src": "1317:10:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1050,
+                              "type": "uint256",
+                              "value": "playerCount"
+                            },
+                            "id": 1086,
+                            "name": "Identifier",
+                            "src": "1328:11:2"
+                          }
+                        ],
+                        "id": 1087,
+                        "name": "FunctionCall",
+                        "src": "1307:33:2"
+                      }
+                    ],
+                    "id": 1088,
+                    "name": "EmitStatement",
+                    "src": "1302:38:2"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "++",
+                          "prefix": false,
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1050,
+                              "type": "uint256",
+                              "value": "playerCount"
+                            },
+                            "id": 1089,
+                            "name": "Identifier",
+                            "src": "1346:11:2"
+                          }
+                        ],
+                        "id": 1090,
+                        "name": "UnaryOperation",
+                        "src": "1346:13:2"
+                      }
+                    ],
+                    "id": 1091,
+                    "name": "ExpressionStatement",
+                    "src": "1346:13:2"
+                  }
+                ],
+                "id": 1092,
+                "name": "Block",
+                "src": "1226:138:2"
+              }
+            ],
+            "id": 1093,
+            "name": "FunctionDefinition",
+            "src": "1197:167:2"
+          }
+        ],
+        "id": 1094,
+        "name": "ContractDefinition",
+        "src": "351:1016:2"
+      }
+    ],
+    "id": 1095,
+    "name": "SourceUnit",
+    "src": "0:1367:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.6+commit.6c089d02.Emscripten.clang"
+  },
+  "networks": {
+    "42": {
+      "events": {
+        "0x6b8fe0f067804a78a12efa88b8428446c8d8a703d5604dffc63ac27fcbdcfd0d": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_player",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "_playerId",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewPlayer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2F8Eb1cc87b1d4348ddeD86eD6463eA46afB0DfE",
+      "transactionHash": "0x6861ecb04f0ca3479cec7f61cb487cd63d0a9bd3340cee687b932cdc5d93cbb5"
+    },
+    "5777": {
+      "events": {
+        "0x6b8fe0f067804a78a12efa88b8428446c8d8a703d5604dffc63ac27fcbdcfd0d": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_player",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "_playerId",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewPlayer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xBdBcEec9cE488d9Fd9b71c2941d9dB0c5239F79C",
+      "transactionHash": "0x63439dd8418378a20662ab3efa0a9631f09f03491c8fa1b1c6e53d2743a07807"
+    }
+  },
+  "schemaVersion": "3.3.3",
+  "updatedAt": "2021-06-18T20:35:58.323Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "author": "Macccs Universal",
+    "details": "All function calls are currently implemented without side effects.",
+    "methods": {},
+    "title": "Player Registry contract."
+  },
+  "userdoc": {
+    "methods": {},
+    "notice": "This contract contains the criteria that makes up a new player and outlines how new players are initiated and stored."
+  }
+}
