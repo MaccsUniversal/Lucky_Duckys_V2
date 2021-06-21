@@ -29,8 +29,8 @@ function ethBalance(){
             }, function(error,betBal){
                 if(!error){
                     playerBetBal = web3js.utils.fromWei(result,'ether');
-                    if(!playerBetBal === 0 && 
-                        !playerEthBal === 0){
+                    if(playerBetBal > 0 || 
+                        playerEthBal > 0){
                             document.getElementById('tint').style.display = 'block';
                             document.getElementById("popUpBox-withdraw-all").style.display = 'block';
                             document.getElementById("info").style.display = 'none';
