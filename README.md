@@ -12,14 +12,26 @@ The main directories are made up of the following:
   1.	Smart contracts 
   2.	Frontend
   
-**Smart Contracts**
+# **Smart Contracts**
 
 build/contracts folder contains all json artifacts of smart contracts compiled and deployed using truffle.
 contracts folder include all smart .sol files that make up Lucky-Duckys.
 migrations holds all .js files that inform truffle of what to implement when deploying artifact files to the blockchain.
 test comprises of .js test files for Slot_machine , Guessing_Game and Player contracts.
 
-**Frontend**
+**Running tests**
+
+First download and install Truffle:
+
+`npm install -g truffle` 
+
+opne the Ganache UI then copy and run the command:
+
+`truffle console`
+
+Then run the `test` command.
+
+# **Frontend**
 
 Frontend folders & files include Images, Web3_Scripts, scripts, sheets, bundle.js and index.html. 
 background image clouds&bird.jpg is located within the Image folder. 
